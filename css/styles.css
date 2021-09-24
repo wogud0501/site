@@ -11764,3 +11764,10 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+.back_ground
+{
+  width: 700;
+  height: 700;
+  margin: auto;
+  background-image: url(https://media.discordapp.net/attachments/823073129013182504/884053498004639764/KakaoTalk_20210905_213059076_1.png);
+}
