@@ -11397,7 +11397,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: aquamarine;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url("../assets/img/header-bg.jpg");
+  background-image: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url("../assets/img/header-bg.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
