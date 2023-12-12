@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" id="themeStyle">
+    <title>행사 리스트 관리</title>
+</head>
+<body data-bg ="white" id="bodyContainer">
+
+<div class="container">
+    <h1>리스트 관리</h1>
+
+    <label for="listItem">리스트 추가:</label>
+    <input type="text" id="listItem" placeholder="할 일을 입력하세요">
+    <button onclick="addItem()">추가</button>
+
+    <ul id="todoList" onclick="handleListClick(event)"></ul>
+
+
+    <div class="options">
+        <label for="theme">테마 선택:</label>
+        <select id="theme" onchange="changeTheme()">
+            <option value="light">라이트</option>
+            <option value="dark">다크</option>
+            <option value="custom">커스텀</option>
+        </select>
+    </div>
+
+    <div class="options">
+        <label for="font">글씨체 선택:</label>
+        <select id="font" onchange="changeFont()">
+            <option value="a바람새M">a바람새M</option>
+            <option value="serif">Serif</option>
+            <option value="Maplestory">MapleStory</option>
+            <option valiue="빛의 계승자 Regular">빛의 계승자 Regular</option>
+        </select>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

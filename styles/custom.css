@@ -1,0 +1,29 @@
+body {
+    background-image: url('https://wallpapercave.com/wp/agLijth.jpg'); /* 기본 배경 이미지 */
+    background-size: cover; /* 배경 이미지를 창에 맞추기 */
+    color: #333;
+    text-align: center; /* 중앙 정렬 */
+    transition: background-image 0.5s;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto; /* 상하 중앙 정렬, 좌우 자동 마진 설정 */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7); /* 배경 이미지가 투명하게 보일 수 있도록 설정 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.options {
+    margin-top: 20px;
+}
