@@ -11,6 +11,17 @@ function addItem() {
     var checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
 
+    var currentDate = new Date();
+    var dateString = currentDate.toLocaleDateString();
+    var timeString = currentDate.toLocaleTimeString();
+    var dateTimeString = dateString + ' ' + timeString;
+
+    li.appendChild(checkbox);
+    li.appendChild(document.createTextNode(listItem + ' (' + dateTimeString + ')'));
+
+    ul.appendChild(li);
+    document.getElementById('listItem').value = '';
+
     li.appendChild(checkbox);
     li.appendChild(document.createTextNode(listItem));
 
