@@ -1,7 +1,7 @@
 <?php
 $servername = "10.114.13.79";
 $username = "wogud0501";
-$password = "Qwogud05041^";
+$password = "wogud05041^";
 $dbname = "shop";
 // 상품 정보 수신
 $productID = $_POST['productID'];
