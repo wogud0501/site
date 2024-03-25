@@ -1,65 +1,17 @@
-function addItem() {
-    var listItem = document.getElementById('listItem').value;
+function addProduct() {
+    var productID = document.getElementById("productID").value;
+    var productName = document.getElementById("productName").value;
+    var available = document.getElementById("available").value;
+    var expirationDate = document.getElementById("expirationDate").value;
 
-    if (listItem === '') {
-        alert('할 일을 입력하세요!');
-        return;
-    }
-
-    var ul = document.getElementById('todoList');
-    var li = document.createElement('li');
-    var checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-
-    var currentDate = new Date();
-    var dateString = currentDate.toLocaleDateString();
-    var timeString = currentDate.toLocaleTimeString();
-    var dateTimeString = dateString + ' ' + timeString;
-
-    li.appendChild(checkbox);
-    li.appendChild(document.createTextNode(listItem + ' (' + dateTimeString + ')'));
-
-    ul.appendChild(li);
-    document.getElementById('listItem').value = '';
-
-    li.appendChild(checkbox);
-    li.appendChild(document.createTextNode(listItem));
-
-    ul.appendChild(li);
-    document.getElementById('listItem').value = '';
-
-    // 추가된 부분: 체크박스 상태에 따라 스타일 변경
-    checkbox.addEventListener('change', function () {
-        if (checkbox.checked) {
-            li.style.textDecoration = 'line-through'; // 체크 표시가 되면 취소선 추가
-        } else {
-            li.style.textDecoration = 'none'; // 체크 해제되면 취소선 제거
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            alert(this.responseText); // 서버로부터의 응답을 알림으로 표시
         }
-    });
-
-    // 추가된 부분: 우클릭 시 리스트 삭제
-    li.addEventListener('contextmenu', function (event) {
-        event.preventDefault(); // 우클릭 메뉴 기본 동작 취소
-        ul.removeChild(li);
-    });
-}
-
-function handleListClick(event) {
-
-}
-
-function changeTheme() {
-    var theme = document.getElementById('theme').value;
-    document.body.className = theme;
-    updateThemeStyle(theme);
-}
-
-function changeFont() {
-    var font = document.getElementById('font').value;
-    document.body.style.fontFamily = font;
-}
-
-function updateThemeStyle(theme) {
-    var themeStyle = document.getElementById('themeStyle');
-    themeStyle.href = 'styles/' + theme + '.css';
+    };
+    xhttp.open("POST", "add_product.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // POST 요청으로 상품 정보를 전송
+    xhttp.send("productID=" + productID + "&productName=" + productName + "&available=" + available + "&expirationDate=" + expirationDate);
 }
