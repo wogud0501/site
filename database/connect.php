@@ -4,10 +4,9 @@ $username = "wogud0501";
 $password = "wogud05041^";
 $dbname = "shop";
 // 상품 정보 수신
-$productID = $_POST['productID'];
+$productDoc = $_POST['productDoc'];
 $productName = $_POST['productName'];
 $available = $_POST['available'];
-$expirationDate = $_POST['expirationDate'];
 
 // MySQL에 연결
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -18,8 +17,8 @@ die("연결 실패: " . $conn->connect_error);
 }
 
 // SQL 쿼리 작성
-$sql = "INSERT INTO product (ProductID, ProductName, available, ExpirationDate)
-VALUES ('$productID', '$productName', '$available', '$expirationDate')";
+$sql = "INSERT INTO product (ProductDoc, ProductName, available)
+VALUES ('$productDoc', '$productName', '$available')";
 
 // 쿼리 실행
 if ($conn->query($sql) === TRUE) {

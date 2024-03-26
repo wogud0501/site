@@ -1,8 +1,7 @@
 function addProduct() {
-    var productID = document.getElementById("productID").value;
+    var productID = document.getElementById("productDoc").value;
     var productName = document.getElementById("productName").value;
     var available = document.getElementById("available").value;
-    var expirationDate = document.getElementById("expirationDate").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -13,5 +12,5 @@ function addProduct() {
     xhttp.open("POST", "connect.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     // POST 요청으로 상품 정보를 전송
-    xhttp.send("productID=" + productID + "&productName=" + productName + "&available=" + available + "&expirationDate=" + expirationDate);
+    xhttp.send("productDoc=" + productDoc + "&productName=" + productName + "&available=" + available);
 }
