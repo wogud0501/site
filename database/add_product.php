@@ -7,7 +7,7 @@ $productDoc = $_POST['productDoc'];
 $productName = $_POST['productName'];
 $available = $_POST['available'];
 
-// MySQL에 연결
+// MySQL 에 연결
 global $servername, $username, $password, $dbname;
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -29,4 +29,4 @@ if ($conn->query($sql) === TRUE) {
 
 // MySQL 연결 닫기
 $conn->close();
-?>
+
