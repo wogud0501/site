@@ -51,8 +51,8 @@ h1 {
 
 button {
     padding: 10px;
-    margin: 10px auto;
-    display: none;
+    margin: 0 auto;
+    display: block;
 }
 table {
     width: 90%;
