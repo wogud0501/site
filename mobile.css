@@ -50,10 +50,10 @@ h1 {
 }
 
 button {
-    padding: 10px;
+
     position: absolute;
-    left: 750px;
-    top: 750px;
+    left: 100px;
+    top: 900px;
 }
 table {
     width: 90%;
