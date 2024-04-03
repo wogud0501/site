@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" id="themeStyle">
     <title>상품 추가 페이지</title>
+    <script>
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        var cssFile = isMobile ? 'mobile.css' : 'desktop.css';
+        var head = document.head || document.getElementsByTagName('head')[0];
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = cssFile;
+        head.appendChild(link);
+    </script>
 </head>
 <body data-bg ="white" id="bodyContainer">
 <h1>상품 추가 화면</h1>
@@ -31,37 +40,37 @@
         </thead>
         <tbody >
            <tr >
-               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" </td>
+               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png"> </td>
                <td>test</td>
                <td >test</td>
                <td >test</td>
            </tr>
         <tr>
-            <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" </td>
+            <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" ></td>
             <td>test</td>
             <td >test</td>
             <td >test</td>
         </tr>
            <tr>
-               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" </td>
+               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png"> </td>
                <td>test</td>
                <td >test</td>
                <td >test</td>
            </tr>
            <tr>
-               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" </td>
+               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" ></td>
                <td>test</td>
                <td >test</td>
                <td >test</td>
            </tr>
            <tr>
-               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" </td>
+               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png"> </td>
                <td>test</td>
                <td >test</td>
                <td >test</td>
            </tr>
            <tr>
-               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" </td>
+               <td><img src="https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png" ></td>
                <td>test</td>
                <td >test</td>
                <td >test</td>

@@ -1,0 +1,80 @@
+body {
+    font-family: sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+    background-image: url("https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png");
+    background-size: cover;
+    text-align: center;
+}
+.container {
+    max-width: 90%;
+    margin: 50px auto;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    line-height: 150%;
+    color : azure;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.options {
+    margin-top: 20px;
+}
+
+.dark {
+    background-color: #333;
+    color : #fff;
+}
+
+.dark .container {
+    background-color: #444;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+.dark .options {
+    border-top: 1px solid #555;
+}
+
+h1 {
+    text-align: center;
+    line-height: 150%;
+    background-color: rgba(255, 255, 255, 0);
+    color : powderblue;
+}
+
+button {
+    padding: 10px;
+    margin: 10px auto;
+    display: none;
+}
+table {
+    width: 90%;
+    text-align: center;
+    border: 1px solid #fff;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin: 10px auto ;
+}
+
+caption {
+    font-weight: bold;
+}
+
+table td, table th {
+    padding : 7px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+img {
+    width: 90px;
+    height: 90px;
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,96 @@
+body {
+    font-family: sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+    background-image: url("https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png");
+    background-size: auto;
+    text-align: center;
+}
+
+.container {
+    max-width: 680px;
+    margin: 50px auto;
+    padding: 0px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.0);
+    text-align: center;
+    line-height: 300%;
+    color: azure;
+
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.options {
+    margin-top: 20px;
+}
+
+.dark {
+    background-color: #333;
+    color: #fff;
+    text-align: center; /* 중앙 정렬 추가 */
+}
+
+.dark .container {
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    text-align: left; /* 좌측 정렬 추가 */
+}
+
+.dark .options {
+    border-top: 1px solid #555;
+}
+
+body {
+    font-family: sans-serif;
+    font-weight: normal;
+}
+
+/* 추가된 부분: 글씨체 설정 */
+body[font='serif'] {
+    font-family: serif;
+}
+h1 {
+    text-align: center;
+    line-height: 150%;
+    background-color : rgba(255, 255, 255, 0);
+    color: powderblue;
+}
+button {
+    padding: 10px;
+    position: absolute;
+    left: 1100px;
+    top: 175px;
+}
+table {
+    width: 700px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-spacing: 1px;
+    font-family: Arial, ui-serif;
+    margin: initial;
+}
+
+caption {
+    font-weight: bold;
+}
+
+table td {
+    padding: 7px;
+    background-color: rgba(0,0,0,0);
+}
+.table th {
+    background-color : rgba(0, 0, 0, 0);
+    color : rgba(0, 0, 0, 0);
+    padding : 7px;
+}
+img {
+    width: 90px;
+    height: 90px;
+}
