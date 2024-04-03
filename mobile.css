@@ -51,6 +51,7 @@ h1 {
 
 button {
     padding: 10px;
+    position: absolute;
     left: 500px;
     top: 500px;
 }
