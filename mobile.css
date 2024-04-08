@@ -1,7 +1,7 @@
 body {
     font-family: sans-serif;
     transition: background-color 0.5s, color 0.5s;
-    background-image: url("https://w.wallhaven.cc/full/9d/wallhaven-9d9kzw.png");
+    background-image: image("/image/background.png");
     background-size: cover;
     text-align: center;
 }
