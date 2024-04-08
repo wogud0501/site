@@ -2,7 +2,7 @@ body {
     font-family: sans-serif;
     transition: background-color 0.5s, color 0.5s;
     background-image: url("https://getwallpapers.com/wallpaper/full/0/c/b/1085793-simple-backgrounds-1920x1080-large-resolution.jpg");
-    background-size: cover;
+    background-size: auto;
     text-align: center;
 }
 .container {
@@ -52,8 +52,8 @@ h1 {
 button {
 
     position: absolute;
-    left: 400px;
-    top: 300px;
+    left: 250px;
+    top: 200px;
 }
 table {
     width: 90%;

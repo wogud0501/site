@@ -82,13 +82,13 @@ caption {
 }
 
 table td {
-    padding: 7px;
+    padding: 4px;
     background-color: rgba(0,0,0,0);
 }
 .table th {
     background-color : rgba(0, 0, 0, 0);
     color : rgba(0, 0, 0, 0);
-    padding : 7px;
+    padding : 4px;
 }
 img {
     width: 90px;
