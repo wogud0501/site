@@ -1,5 +1,5 @@
 function addProduct() {
-    var productID = document.getElementById("productDoc").value;
+    var productDoc = document.getElementById("productDoc").value;
     var productName = document.getElementById("productName").value;
     var available = document.getElementById("available").value;
 
