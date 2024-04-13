@@ -2,7 +2,7 @@ body {
     font-family: sans-serif;
     transition: background-color 0.5s, color 0.5s;
     background-image: url("https://getwallpapers.com/wallpaper/full/0/c/b/1085793-simple-backgrounds-1920x1080-large-resolution.jpg");
-    background-size: auto;
+    background-size: cover;
     text-align: center;
 }
 
