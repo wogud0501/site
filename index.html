@@ -19,21 +19,26 @@
 <h1>상품 추가 화면</h1>
 <div class="container">
 
-    <label for="productDoc">상품 위치:</label>
+    <label for="productDoc">상품 이름:</label>
     <input type="text" id="productDoc" placeholder="상품의 위치를 입력하세요"><br>
 
-    <label for="productName">상품 이름:</label>
+    <label for="productName">상품 위치:</label>
     <input type="text" id="productName" placeholder="상품 이름을 입력하세요"><br>
 
     <label for="available">남은 갯수:</label>
     <input type="text" id="available" placeholder="남은 갯수를 입력하세요"><br>
+
+    <button onclick="changeRow(1)">1번쨰 행 선택</button>
+    <button onclick="changeRow(2)">2번쨰 행 선택</button>
+    <button onClick="changeRow(3)">3번쨰 행 선택</button>
+
     <button onclick="addProduct()">추가</button>
     <table>
         <caption>상품 재고</caption>
         <thead >
                    <tr>
                        <th>물품 사진</th>
-                       <th>물품 목록</th>
+                       <th>물품 이름</th>
                        <th>물품 위치</th>
                        <th>물품 갯수</th>
                    </tr>
