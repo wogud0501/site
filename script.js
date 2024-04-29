@@ -30,5 +30,30 @@ function updateRow() {
     rowData[selectedRow].name = productName;
     rowData[selectedRow].count = available;
 
+    var rows = document.querySelectorAll('tbody tr');
+    var cells = rows[selectedRow].getElementsByTagName('td');
+    cells[1].textContent = productName;
+    cells[2].textContent = productLoc;
+    cells [3].textContent = available;
+
+    // 서버로 상품 전송
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            alert(this.responseText);
+        }
+    };
+    xhttp.open("POST", "./add_product.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("productLoc=" + productLoc + "&productName=" + productName + "&available=" + available);
+
     /* Update the table */
+}
+function getSelectedRow() {
+    for (let i = 1; i <= 5; i++) {
+        if ( document.getElementById('row' + i).checked ) {
+            return i - 1;
+        }
+    }
+    return -1;
 }
