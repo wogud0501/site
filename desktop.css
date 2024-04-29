@@ -17,6 +17,10 @@ body {
 
 }
 
+#row1Btn, #row2Btn, #row3Btn, #row4Btn, #row5Btn {
+    display: none;
+}
+
 
 ul {
     list-style-type: none;
