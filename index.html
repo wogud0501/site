@@ -8,7 +8,7 @@
         var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         var cssFile = isMobile ? 'mobile.css' : 'desktop.css';
         var head = document.head || document.getElementsByTagName('head')[0];
-        var link = document.createElement('link'
+        var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = cssFile;
@@ -19,11 +19,11 @@
 <h1>상품 추가 화면</h1>
 <div class="container">
 
-    <label for="productLoc">상품 이름:</label>
-    <input type="text" id="productLoc" placeholder="상품의 위치를 입력하세요"><br>
+    <label for="productName">상품 이름:</label>
+    <input type="text" id="productName" placeholder="상품의 위치를 입력하세요"><br>
 
-    <label for="productName">상품 위치:</label>
-    <input type="text" id="productName" placeholder="상품 이름을 입력하세요"><br>
+    <label for="productLoc">상품 위치:</label>
+    <input type="text" id="productLoc" placeholder="상품 이름을 입력하세요"><br>
 
     <label for="available">남은 갯수:</label>
     <input type="text" id="available" placeholder="남은 갯수를 입력하세요"><br>
