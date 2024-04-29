@@ -4,7 +4,7 @@ function changeRow(rowNumber) {
     alert("행 " + rowNumber + "선택");
 }
 
-function addProduct() {
+function addProducts() {
     var productDoc = document.getElementById("productName").value;
     var productName = document.getElementById("productDoc").value;
     var available = document.getElementById("available").value;
