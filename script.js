@@ -43,7 +43,7 @@ function updateRow() {
             alert(this.responseText);
         }
     };
-    xhttp.open("POST", "./add_product.php", true);
+    xhttp.open("POST", "/add_product", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("productLoc=" + productLoc + "&productName=" + productName + "&available=" + available);
 
