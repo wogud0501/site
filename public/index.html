@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 추가 페이지</title>
+    <script>
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        var cssFile = isMobile ? 'mobile.css' : 'desktop.css';
+        var head = document.head || document.getElementsByTagName('head')[0];
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = cssFile;
+        head.appendChild(link);
+    </script>
+</head>
+<body data-bg="white" id="bodyContainer">
+<h1>상품 추가 화면</h1>
+<div class="container">
+
+    <label for="productName">상품 이름:</label>
+    <input type="text" id="productName" placeholder="상품의 이름을 입력하세요"><br>
+
+    <label for="productLoc">상품 위치:</label>
+    <input type="text" id="productLoc" placeholder="상품 위치를 입력하세요"><br>
+
+    <label for="available">남은 갯수:</label>
+    <input type="text" id="available" placeholder="남은 갯수를 입력하세요"><br>
+
+    <button onclick="addProduct()">추가</button>
+    <table>
+        <caption>상품 재고</caption>
+        <thead>
+        <tr>
+            <th>물품 사진</th>
+            <th>물품 이름</th>
+            <th>물품 위치</th>
+            <th>물품 갯수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr onclick="selectRow(1)">
+            <td><img src="/image/milkiss.jpg"></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+        <tr onclick="selectRow(2)">
+            <td><img src="/image/chickenpop.jpg"></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+        <tr onclick="selectRow(3)">
+            <td><img src="/image/tolietpaper.jpg"></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+        <tr onclick="selectRow(4)">
+            <td><img src="/image/waterpaper.jpg"></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+        <tr onclick="selectRow(5)">
+            <td><img src="/image/none"></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+        <tr onclick="selectRow(6)">
+            <td><img src="/image/background.png"></td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAexvmNTmDwR9K7LvCZJgDIh9_mp6Zok4M",
+        authDomain: "https://akmoddings.firebaseapp.com",
+        projectId: "akmoddings",
+        storageBucket: "gs://akmoddings.appspot.com",
+        messagingSenderId: "719912819646",
+        appId: "1:719912819646:web:57427751dbd4e01e4277ef"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    var rowData = [
+        { location: ' ', name: ' ', count: ' ' },
+        { location: ' ', name: ' ', count: ' ' },
+        { location: ' ', name: ' ', count: ' ' },
+        { location: ' ', name: ' ', count: ' ' },
+        { location: ' ', name: ' ', count: ' ' },
+        { location: ' ', name: ' ', count: ' ' }
+    ];
+
+    var selectedRowNum = null;
+
+    function selectRow(rowNum) {
+        selectedRowNum = rowNum;
+        var rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => row.style.backgroundColor = ''); // Reset background color for all rows
+        rows[rowNum - 1].style.backgroundColor = '#0a0a0a'; // Highlight the selected row
+        alert(rowNum + "번째 행이 선택되었습니다!");
+    }
+
+    function updateRow(rowNum) {
+        var productLoc = document.getElementById("productLoc").value;
+        var productName = document.getElementById("productName").value;
+        var available = document.getElementById("available").value;
+
+        rowData[rowNum - 1].location = productLoc;
+        rowData[rowNum - 1].name = productName;
+        rowData[rowNum - 1].count = available;
+
+        var rows = document.querySelectorAll('tbody tr');
+        var cells = rows[rowNum - 1].children;
+        cells[1].textContent = productName;
+        cells[2].textContent = productLoc;
+        cells[3].textContent = available;
+    }
+
+    async function addProduct() {
+        if (selectedRowNum === null) {
+            alert("먼저 행을 선택해주세요!");
+            return;
+        }
+
+        var productLoc = document.getElementById("productLoc").value;
+        var productName = document.getElementById("productName").value;
+        var available = document.getElementById("available").value;
+
+        if (!productName || !productLoc || !available) {
+            console.error("Error: One or more fields are empty");
+            alert("모든 필드를 입력해주세요!");
+            return;
+        }
+
+        updateRow(selectedRowNum);
+
+        try {
+            const docRef = await addDoc(collection(db, "products"), {
+                name: productName,
+                location: productLoc,
+                available: parseInt(available)
+            });
+            console.log("Document written with ID: ", docRef.id);
+            alert("상품이 추가되었습니다!");
+            selectedRowNum = (selectedRowNum % 6) + 1; // Move to the next row cyclically
+            selectRow(selectedRowNum); // Automatically select the next row
+        } catch (e) {
+            console.error("Error adding document: ", e);
+            alert("상품 추가에 실패했습니다!");
+        }
+    }
+
+    window.selectRow = selectRow; // selectRow를 전역으로 노출
+    window.addProduct = addProduct; // addProduct를 전역으로 노출
+</script>
+</body>
+</html>

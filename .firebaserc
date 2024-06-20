@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "akmoddings"
+  },
+  "targets": {},
+  "etags": {
+    "akmoddings": {
+      "extensionInstances": {}
+    }
+  },
+  "dataconnectEmulatorConfig": {}
+}
