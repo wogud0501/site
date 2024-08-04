@@ -1,12 +1,12 @@
 body {
     font-family: sans-serif;
     transition: background-color 0.5s, color 0.5s;
-    background-image: url("https://getwallpapers.com/wallpaper/full/0/c/b/1085793-simple-backgrounds-1920x1080-large-resolution.jpg");
+    background-image: url("https://i.pinimg.com/originals/03/44/7b/03447be73c5b73a3f66b411eaf05ff67.jpg");
     background-size: cover;
     text-align: center;
 }
 
-.container {
+#productSection {
     max-width: 680px;
     margin: 50px auto;
     padding: 0px;
@@ -98,4 +98,9 @@ table td {
 img {
     width: 90px;
     height: 90px;
+}
+label {
+    font-size: 20px;
+    background-color: #fdd000;
+    font-weight: bold;
 }

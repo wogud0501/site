@@ -9,15 +9,5 @@
 ### 무단 유출 시 법적 조치를 진행할 예정이오니, 미리 사전에 사용이 필요하신 분은,
 ### `djaeyeo@gmail.com`로 사용 목적과, 이유를 말씀해주시면, 답변 해 드리겠습니다.
 
-**사용한 라이브러리는 다음과 같습니다**
-
-- Firebase Admin
-- Firebase Tools
-- Firebase Auth
-- Firebase Firestore
-- Firebase Extensions
-- Firebase Hosting
-- Firebase Function
-
 **Copyright © SHT 2024**
 
