@@ -21,18 +21,23 @@
 <body data-bg="white" id="bodyContainer">
 <h1>상품 추가 화면</h1>
 
-    <!-- 로그인 폼 -->
-    <div id="loginForm">
-        <label for="email">이메일:</label>
-        <input type="email" id="email" placeholder="이메일을 입력하세요"><br>
+<!-- 로그인 폼 -->
+<div id="loginForm">
+    <label for="email">이메일:</label>
+    <input type="email" id="email" placeholder="이메일을 입력하세요"><br>
 
-        <label for="password">비밀번호:</label>
-        <input type="password" id="password" placeholder="비밀번호를 입력하세요"><br>
+    <label for="password">비밀번호:</label>
+    <input type="password" id="password" placeholder="비밀번호를 입력하세요"><br>
 
-        <button onclick="login()" style="display: block; margin-left: 100px;">로그인</button>
-        <button onClick="logout()" style="display: block; margin-left: 200px">로그아웃</button>
-        <p id="authStatus"></p>
-    </div>
+    <button onclick="login()" style="display: block; margin-left: 15px">로그인</button>
+    <p id="authStatus"></p>
+
+    <button onclick="toggleResetPassword()" style="display: block; margin-left: 150px;">비밀번호 재설정</button>
+    <button onclick="toggleChangeEmail()" style="display: block; margin-left: 270px;">이메일 주소 변경</button>
+</div>
+
+<!-- 로그아웃 버튼, 로그인 상태에 관계없이 항상 표시 -->
+<button onclick="logout()" style="display: block; margin-left: 75px;">로그아웃</button>
 
 <div id="productSection" style="display: none;">
     <label for="productName">상품 이름:</label>
@@ -96,10 +101,22 @@
     </table>
 </div>
 
+<div id="passwordResetSection" style="display: none;">
+    <label for="resetEmail">이메일:</label>
+    <input type="email" id="resetEmail" placeholder="비밀번호를 재설정할 이메일을 입력하세요"><br>
+    <button onclick="resetPassword()">비밀번호 재설정</button>
+</div>
+
+<div id="emailChangeSection" style="display: none;">
+    <label for="newEmail">새 이메일:</label>
+    <input type="email" id="newEmail" placeholder="새 이메일 주소를 입력하세요"><br>
+    <button onclick="changeEmail()">이메일 변경</button>
+</div>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import {getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "your-api-key",
@@ -115,15 +132,6 @@
     const db = getFirestore(app);
     const auth = getAuth();
 
-    var rowData = [
-        { location: ' ', name: ' ', count: ' ' },
-        { location: ' ', name: ' ', count: ' ' },
-        { location: ' ', name: ' ', count: ' ' },
-        { location: ' ', name: ' ', count: ' ' },
-        { location: ' ', name: ' ', count: ' ' },
-        { location: ' ', name: ' ', count: ' ' }
-    ];
-
     var selectedRowNum = null;
 
     function selectRow(rowNum) {
@@ -138,10 +146,6 @@
         var productLoc = document.getElementById("productLoc").value;
         var productName = document.getElementById("productName").value;
         var available = document.getElementById("available").value;
-
-        rowData[rowNum - 1].location = productLoc;
-        rowData[rowNum - 1].name = productName;
-        rowData[rowNum - 1].count = available;
 
         var rows = document.querySelectorAll('tbody tr');
         var cells = rows[rowNum - 1].children;
@@ -212,6 +216,8 @@
             document.getElementById("authStatus").textContent = "로그아웃 성공!";
             document.getElementById("loginForm").style.display = "block";
             document.getElementById("productSection").style.display = "none";
+            document.getElementById("email").value = ""; // Clear email field
+            document.getElementById("password").value = ""; // Clear password field
         }).catch((error) => {
             console.error("Error logging out: ", error);
             document.getElementById("authStatus").textContent = "로그아웃 실패!";
@@ -219,10 +225,84 @@
         });
     }
 
+    function toggleResetPassword() {
+        const resetSection = document.getElementById("passwordResetSection");
+        const loginForm = document.getElementById("loginForm");
+        const productSection = document.getElementById("productSection");
+
+        if (resetSection.style.display === "none") {
+            resetSection.style.display = "block";
+            loginForm.style.display = "none";
+            productSection.style.display = "none";
+        } else {
+            resetSection.style.display = "none";
+            loginForm.style.display = "block";
+            productSection.style.display = "none";
+        }
+    }
+
+    function toggleChangeEmail() {
+        const changeEmailSection = document.getElementById("emailChangeSection");
+        const loginForm = document.getElementById("loginForm");
+        const productSection = document.getElementById("productSection");
+
+        if (changeEmailSection.style.display === "none") {
+            changeEmailSection.style.display = "block";
+            loginForm.style.display = "none";
+            productSection.style.display = "none";
+        } else {
+            changeEmailSection.style.display = "none";
+            loginForm.style.display = "block";
+            productSection.style.display = "none";
+        }
+    }
+
+    function resetPassword() {
+        var resetEmail = document.getElementById("resetEmail").value;
+        sendPasswordResetEmail(auth, resetEmail)
+            .then(() => {
+                alert('비밀번호 재설정 이메일이 전송되었습니다!');
+                document.getElementById("passwordResetSection").style.display = "none";
+                document.getElementById("loginForm").style.display = "block";
+            })
+            .catch((error) => {
+                console.error('Error resetting password: ', error);
+                alert('비밀번호 재설정 실패!');
+                document.getElementById("passwordResetSection").style.display = "none";
+                document.getElementById("loginForm").style.display = "block";
+            });
+    }
+
+    function changeEmail() {
+        var newEmail = document.getElementById("newEmail").value;
+        const user = auth.currentUser;
+
+        if (user) {
+            updateEmail(user, newEmail).then(() => {
+                alert('이메일이 변경되었습니다!');
+                document.getElementById("emailChangeSection").style.display = "none";
+                document.getElementById("loginForm").style.display = "block";
+            }).catch((error) => {
+                console.error('Error changing email: ', error);
+                alert('이메일 변경 실패!');
+                document.getElementById("emailChangeSection").style.display = "none";
+                document.getElementById("loginForm").style.display = "block";
+            });
+        } else {
+            alert('로그인이 필요합니다!');
+            document.getElementById("emailChangeSection").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+        }
+    }
+
     window.selectRow = selectRow; // selectRow를 전역으로 노출
     window.addProduct = addProduct; // addProduct를 전역으로 노출
     window.login = login; // login을 전역으로 노출
     window.logout = logout; // logout을 전역으로 노출
+    window.resetPassword = resetPassword; // resetPassword를 전역으로 노출
+    window.changeEmail = changeEmail; // changeEmail을 전역으로 노출
+    window.toggleResetPassword = toggleResetPassword; // toggleResetPassword를 전역으로 노출
+    window.toggleChangeEmail = toggleChangeEmail; // toggleChangeEmail을 전역으로 노출
 </script>
 </body>
 </html>
