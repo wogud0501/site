@@ -310,6 +310,18 @@
             login();
         }
     })
+    document.getElementById("productLoc").addEventListener("keydown", function (event){
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addProduct();
+        }
+    });
+    document.getElementById("available").addEventListener("keydown", function (event){
+        if (event.key === "Enter"){
+            event.preventDefault();
+            addProduct();
+        }
+    });
 
     window.selectRow = selectRow; // selectRow를 전역으로 노출
     window.addProduct = addProduct; // addProduct를 전역으로 노출
