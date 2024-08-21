@@ -115,15 +115,15 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, collection, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "your-api-key",
         authDomain: "your-auth-domain",
-        projectId: "your-project-id",
-        storageBucket: "your-storage-bucket",
-        messagingSenderId: "your-messaging-sender-id",
+        projectId: "your-projectid",
+        storageBucket: "your-storagebucket",
+        messagingSenderId: "your-sender-id",
         appId: "your-app-id"
     };
 
@@ -173,12 +173,14 @@
         updateRow(selectedRowNum);
 
         try {
-            const docRef = await addDoc(collection(db, "products"), {
+            const docId =`row-${selectedRowNum}`;
+
+            await setDoc(doc(db, "products", docId), {
                 name: productName,
                 location: productLoc,
                 available: parseInt(available)
             });
-            console.log("Document written with ID: ", docRef.id);
+            console.log("Document written with ID: ", docId);
             alert("상품이 추가되었습니다!");
             selectedRowNum = (selectedRowNum % 6) + 1; // Move to the next row cyclically
             selectRow(selectedRowNum); // Automatically select the next row
@@ -295,6 +297,20 @@
         }
     }
 
+    document.getElementById("email").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            login();
+        }
+    });
+
+    document.getElementById("password").addEventListener("keydown", function (event){
+        if (event.key === "Enter") {
+            event.preventDefault();
+            login();
+        }
+    })
+
     window.selectRow = selectRow; // selectRow를 전역으로 노출
     window.addProduct = addProduct; // addProduct를 전역으로 노출
     window.login = login; // login을 전역으로 노출
@@ -303,6 +319,7 @@
     window.changeEmail = changeEmail; // changeEmail을 전역으로 노출
     window.toggleResetPassword = toggleResetPassword; // toggleResetPassword를 전역으로 노출
     window.toggleChangeEmail = toggleChangeEmail; // toggleChangeEmail을 전역으로 노출
+
 </script>
 </body>
 </html>

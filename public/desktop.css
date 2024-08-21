@@ -1,7 +1,7 @@
 body {
     font-family: sans-serif;
     transition: background-color 0.5s, color 0.5s;
-    background-image: url("https://i.pinimg.com/originals/03/44/7b/03447be73c5b73a3f66b411eaf05ff67.jpg");
+    background-image: url("https://backgroundabstract.com/wp-content/uploads/edd/2022/02/5594016-e1656071131636.jpg");
     background-size: cover;
     text-align: center;
 }
@@ -13,7 +13,7 @@ body {
     box-shadow: 0 0 0px rgba(0, 0, 0, 0.0);
     text-align: center;
     line-height: 200%;
-    color: azure;
+    color: black;
 
 }
 
@@ -64,7 +64,7 @@ h1 {
     text-align: center;
     line-height: 150%;
     background-color : rgba(255, 255, 255, 0);
-    color: powderblue;
+    color: black;
 }
 button {
     padding: 5px;
