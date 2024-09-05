@@ -1,18 +1,35 @@
 body {
     font-family: sans-serif;
     transition: background-color 0.5s, color 0.5s;
-    background-image: url("https://i.pinimg.com/originals/03/44/7b/03447be73c5b73a3f66b411eaf05ff67.jpg");
+    background-image: url("https://backgroundabstract.com/wp-content/uploads/edd/2022/02/5594016-e1656071131636.jpg");
     background-size: auto;
     text-align: center;
+    font-weight: normal;
 }
-.container {
-    max-width: 90%;
-    margin: 50px auto;
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+body[font='serif'] {
+    font-family: serif;
+}
+
+h1 {
     text-align: center;
-    line-height: 125%;
-    color : azure;
+    line-height: 150%;
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+}
+
+#productSection {
+    max-width: 680px;
+    margin: 50px auto;
+    padding: 0px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.0);
+    text-align: center;
+    line-height: 200%;
+    color: black;
+}
+
+#row1Btn, #row2Btn, #row3Btn, #row4Btn, #row5Btn {
+    display: none;
 }
 
 ul {
@@ -30,52 +47,244 @@ li {
 
 .dark {
     background-color: #333;
-    color : #fff;
+    color: #fff;
+    text-align: center;
 }
 
 .dark .container {
     background-color: #444;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    text-align: left;
 }
 
 .dark .options {
     border-top: 1px solid #555;
 }
 
-h1 {
-    text-align: center;
-    line-height: 150%;
-    background-color: rgba(255, 255, 255, 0);
-    color : powderblue;
-}
-
-button {
-
-    position: absolute;
-    left: 250px;
-    top: 200px;
-}
 table {
-    width: 90%;
+    width: 700px;
     text-align: center;
     border: 1px solid #fff;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    margin: 10px auto ;
+    border-spacing: 1px;
+    font-family: Arial, ui-serif;
+    margin: initial;
 }
 
 caption {
     font-weight: bold;
 }
 
-table td, table th {
-    padding : 7px;
+table td {
+    padding: 4px;
+    background-color: rgba(0,0,0,0);
+}
+
+.table th {
     background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+    padding: 4px;
 }
 
 img {
     width: 90px;
     height: 90px;
+}
+
+label {
+    font-size: 20px;
+    background-color: #fdd000;
+    font-weight: bold;
+}
+
+/* 사이드바 및 메뉴 아이콘 관련 CSS */
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 0;
+    background-color: #f0f0f0;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    width: 250px;
+}
+
+.menu-icon {
+    width: 30px;
+    height: 24px;
+    cursor: pointer;
+    margin: 0 auto 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    left: auto;
+}
+
+.menu-icon span {
     display: block;
-    margin: 0 auto;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+/* 햄버거 아이콘 애니메이션 효과 */
+.sidebar.open .menu-icon span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.sidebar.open .menu-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar.open .menu-icon span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu button {
+    background-size : 200% auto;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 80%;
+    box-sizing: border-box;
+}
+.menu button:hover {
+    background-position: right center;
+}
+
+.menu button:nth-of-type(1) {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+.menu button:nth-of-type(2) {
+    background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+}
+.menu button:nth-of-type(3) {
+    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* 메뉴 열림 상태 스타일 */
+.sidebar.open .menu {
+    display: block;
+    opacity : 1;
+}
+
+/* 메뉴 닫힘 상태 스타일 (초기 상태) */
+.menu {
+    display: none;
+}
+
+/* 뷰포트 설정: 확대/축소 없이 콘텐츠 표시 */
+@viewport {
+    width: device-width;
+    initial-scale: 1.0;
+    maximum-scale: 1.0;
+    user-scalable: no;
+}
+
+/* 미디어 쿼리: 필요한 경우 특정 화면 크기에서 스타일 조정 */
+@media (max-width: 360px) { /* S22 화면 너비 */
+    #productSection {
+        max-width: 90%; /* 화면 너비에 맞춰 조정 */
+        line-height: 150%; /* 줄 간격 조정 */
+    }
+
+    table {
+        width: 100%; /* 화면 너비에 맞춰 조정 */
+        font-size: 14px; /* 글자 크기 조정 */
+    }
+
+    img {
+        width: 60px; /* 이미지 크기 조정 */
+        height: 60px;
+    }
+
+    label {
+        font-size: 16px; /* 글자 크기 조정 */
+    }
+
+    /* 사이드바 스타일 조정 */
+    .sidebar.open {
+        width: 70%; /* 모바일 화면에 맞춰 사이드바 너비 조정 */
+    }
+
+    .menu button {
+        padding: 8px 16px; /* 버튼 패딩 조정 */
+        font-size: 14px; /* 버튼 글자 크기 조정 */
+    }
+
+    .content {
+        padding: 10px; /* 콘텐츠 영역 패딩 조정 */
+    }
+}
+@media (max-width: 390px) { /* 아이폰 13 프로 화면 너비 */
+    #productSection {
+        max-width: 90%; /* 화면 너비에 맞춰 조정 */
+        line-height: 150%; /* 줄 간격 조정 */
+    }
+
+    table {
+        width: 100%; /* 화면 너비에 맞춰 조정 */
+        font-size: 14px; /* 글자 크기 조정 */
+    }
+
+    img {
+        width: 60px; /* 이미지 크기 조정 */
+        height: 60px;
+    }
+
+    label {
+        font-size: 16px; /* 글자 크기 조정 */
+    }
+
+    /* 사이드바 스타일 조정 */
+    .sidebar.open {
+        width: 70%; /* 모바일 화면에 맞춰 사이드바 너비 조정 */
+    }
+
+    .menu button {
+        padding: 8px 16px; /* 버튼 패딩 조정 */
+        font-size: 14px; /* 버튼 글자 크기 조정 */
+    }
+
+    .content {
+        padding: 10px; /* 콘텐츠 영역 패딩 조정 */
+    }
 }

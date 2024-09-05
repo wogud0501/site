@@ -4,8 +4,19 @@ body {
     background-image: url("https://backgroundabstract.com/wp-content/uploads/edd/2022/02/5594016-e1656071131636.jpg");
     background-size: cover;
     text-align: center;
+    font-weight: normal; /* 추가된 부분: 글씨체 설정 */
 }
 
+body[font='serif'] { /* 추가된 부분: 글씨체 설정 */
+    font-family: serif;
+}
+
+h1 {
+    text-align: center;
+    line-height: 150%;
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+}
 #productSection {
     max-width: 680px;
     margin: 50px auto;
@@ -14,13 +25,11 @@ body {
     text-align: center;
     line-height: 200%;
     color: black;
-
 }
 
 #row1Btn, #row2Btn, #row3Btn, #row4Btn, #row5Btn {
     display: none;
 }
-
 
 ul {
     list-style-type: none;
@@ -38,41 +47,20 @@ li {
 .dark {
     background-color: #333;
     color: #fff;
-    text-align: center; /* 중앙 정렬 추가 */
+    text-align: center;
 }
 
 .dark .container {
     background-color: #444;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    text-align: left; /* 좌측 정렬 추가 */
+    text-align: left;
 }
 
 .dark .options {
     border-top: 1px solid #555;
 }
 
-body {
-    font-family: sans-serif;
-    font-weight: normal;
-}
 
-/* 추가된 부분: 글씨체 설정 */
-body[font='serif'] {
-    font-family: serif;
-}
-h1 {
-    text-align: center;
-    line-height: 150%;
-    background-color : rgba(255, 255, 255, 0);
-    color: black;
-}
-button {
-    padding: 5px;
-    position: absolute;
-    left: 600px;
-    top: 175px;
-
-}
 table {
     width: 700px;
     text-align: center;
@@ -90,17 +78,137 @@ table td {
     padding: 4px;
     background-color: rgba(0,0,0,0);
 }
+
 .table th {
-    background-color : rgba(0, 0, 0, 0);
-    color : rgba(0, 0, 0, 0);
-    padding : 4px;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+    padding: 4px;
 }
+
 img {
     width: 90px;
     height: 90px;
 }
+
 label {
     font-size: 20px;
     background-color: #fdd000;
     font-weight: bold;
 }
+
+/* 사이드바 및 메뉴 아이콘 관련 CSS */
+.container {
+    display: flex; /* Flexbox 레이아웃을 사용하여 사이드바와 콘텐츠 영역을 배치합니다. */
+}
+
+.sidebar {
+    width: 0; /* 초기에는 사이드바를 숨깁니다. */
+    background-color: #f0f0f0; /* 사이드바 배경색을 설정합니다. */
+    padding: 20px; /* 사이드바 내부 여백을 설정합니다. */
+    position: fixed; /* 사이드바를 화면에 고정합니다. */
+    height: 100%; /* 사이드바 높이를 화면 전체 높이로 설정합니다. */
+    left: 0; /* 사이드바를 왼쪽에 배치합니다. */
+    top: 0;
+    overflow: auto; /* 사이드바 내부 콘텐츠가 넘칠 경우 스크롤바를 표시합니다. */
+    overflow-x: hidden; /* 사이드바 외부로 콘텐츠가 넘치는 것을 방지합니다. */
+    transition: 0.5s; /* 사이드바 너비 변화에 부드러운 애니메이션 효과를 추가합니다. */
+    z-index: 1000; /* 사이드바가 다른 요소 위에 나타나도록 z-index 값을 설정합니다. */
+}
+
+.sidebar.open {
+    width: 250px; /* 사이드바가 열렸을 때 너비를 설정합니다. */
+}
+
+.menu-icon {
+    width: 30px;
+    height: 24px;
+    cursor: pointer; /* 마우스 커서를 포인터 모양으로 변경합니다. */
+    margin: 0 auto 20px;
+    position: absolute; /* 메뉴 아이콘을 사이드바 내부에 절대 위치로 배치합니다. */
+    top: 20px;
+    right: 20px;
+    left: auto; /* 왼쪽 자동 배치를 해제합니다. */
+}
+
+.menu-icon span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    margin-bottom: 5px;
+    transition: 0.3s; /* 햄버거 아이콘 애니메이션 효과를 위한 transition 속성을 추가합니다. */
+}
+
+/* 햄버거 아이콘 애니메이션 효과 */
+.sidebar.open .menu-icon span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.sidebar.open .menu-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar.open .menu-icon span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu button {
+    background-size: 200% auto;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 80%;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+.menu button:hover {
+    background-position: right center;
+}
+
+.menu button:nth-of-type(1) {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+.menu button:nth-of-type(2) {
+    background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+}
+.menu button:nth-of-type(3) {
+    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+}
+
+.content {
+    flex-grow: 1; /* 콘텐츠 영역이 남은 공간을 모두 차지하도록 설정 */
+    padding: 20px;
+}
+
+/* 메뉴 열림 상태 스타일 */
+.sidebar.open .menu {
+    display: block; /* 메뉴 항목들을 보이도록 설정 */
+    opacity : 1; /* 메뉴 항목들이 투명하지 않도록 설정 */
+}
+
+/* 메뉴 닫힘 상태 스타일 (초기 상태) */
+.menu {
+    display: none; /* 메뉴 항목들을 숨김 */
+}
+

@@ -19,8 +19,23 @@
     </script>
 </head>
 <body data-bg="white" id="bodyContainer">
-<h1>상품 추가 화면</h1>
-
+<div class="container">
+    <div class="sidebar">
+        <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="menu open">
+            <li><button onclick="toggleResetPassword()">비밀번호 재설정</button></li>
+            <li><button onclick="toggleChangeEmail()">이메일 주소 변경</button></li>
+            <li><button onclick="logout()">로그아웃</button></li>
+        </ul>
+    </div>
+</div>
+    <div class="content">
+        <h1>상품 추가 화면</h1>
+    </div>
 <!-- 로그인 폼 -->
 <div id="loginForm">
     <label for="email">이메일:</label>
@@ -29,15 +44,9 @@
     <label for="password">비밀번호:</label>
     <input type="password" id="password" placeholder="비밀번호를 입력하세요"><br>
 
-    <button onclick="login()" style="display: block; margin-left: 15px">로그인</button>
     <p id="authStatus"></p>
-
-    <button onclick="toggleResetPassword()" style="display: block; margin-left: 150px;">비밀번호 재설정</button>
-    <button onclick="toggleChangeEmail()" style="display: block; margin-left: 270px;">이메일 주소 변경</button>
 </div>
 
-<!-- 로그아웃 버튼, 로그인 상태에 관계없이 항상 표시 -->
-<button onclick="logout()" style="display: block; margin-left: 75px;">로그아웃</button>
 
 <div id="productSection" style="display: none;">
     <label for="productName">상품 이름:</label>
@@ -62,37 +71,37 @@
         </thead>
         <tbody>
         <tr onclick="selectRow(1)">
-            <td><img src="/image/milkiss.jpg"></td>
+            <td><img src="/image/cola.jpg" alt="콜라"></td>
             <td>test</td>
             <td>test</td>
             <td>test</td>
         </tr>
         <tr onclick="selectRow(2)">
-            <td><img src="/image/chickenpop.jpg"></td>
+            <td><img src="/image/chickenpop.jpg" alt="치킨팝"></td>
             <td>test</td>
             <td>test</td>
             <td>test</td>
         </tr>
         <tr onclick="selectRow(3)">
-            <td><img src="/image/tolietpaper.jpg"></td>
+            <td><img src="/image/tolietpaper.jpg" alt="화장지"></td>
             <td>test</td>
             <td>test</td>
             <td>test</td>
         </tr>
         <tr onclick="selectRow(4)">
-            <td><img src="/image/waterpaper.jpg"></td>
+            <td><img src="/image/waterpaper.jpg" alt="물티슈"></td>
             <td>test</td>
             <td>test</td>
             <td>test</td>
         </tr>
         <tr onclick="selectRow(5)">
-            <td><img src="/image/none"></td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
+            <td><img src="/image/waterpaper.jpg" alt="없음"></td>
+            <td>없음</td>
+            <td>없음</td>
+            <td>0</td>
         </tr>
         <tr onclick="selectRow(6)">
-            <td><img src="/image/background.png"></td>
+            <td><img src="/image/waterpaper.jpg" alt="없음"></td>
             <td>test</td>
             <td>test</td>
             <td>test</td>
@@ -115,30 +124,58 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, collection, setDoc, doc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "your-api-key",
         authDomain: "your-auth-domain",
-        projectId: "your-projectid",
-        storageBucket: "your-storagebucket",
-        messagingSenderId: "your-sender-id",
+        projectId: "your-project-id",
+        storageBucket: "your-storage-bucket",
+        messagingSenderId: "your-messaging-sender-id",
         appId: "your-app-id"
     };
 
     // Firebase 초기화
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    const db = getFirestore(app, 'shop');
     const auth = getAuth();
 
     var selectedRowNum = null;
+
+    async function loadProducts() {
+        try {
+            const querySnapshot = await getDocs(collection(db, "products"));
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const rowNum = parseInt(doc.id.split('-')[1]);
+                const rows = document.querySelectorAll('tbody tr');
+                const cells = rows[rowNum - 1].children;
+
+
+                cells[1].textContent = data.name;
+                cells[2].textContent = data.location;
+                cells[3].textContent = data.available;
+
+            })
+        } catch (error) {
+            console.error("문서를 가져오는데 에려가 발생하였습니다. ", error)
+            alert("문서를 가져오는데 에러가 발생했습니다!")
+        }
+    }
 
     function selectRow(rowNum) {
         selectedRowNum = rowNum;
         var rows = document.querySelectorAll('tbody tr');
         rows.forEach(row => row.style.backgroundColor = ''); // Reset background color for all rows
         rows[rowNum - 1].style.backgroundColor = '#568'; // Highlight the selected row
+
+        // Populate input fields with the selected row's data
+        const cells = rows[rowNum - 1].children;
+        document.getElementById("productName").value = cells[1].textContent;
+        document.getElementById("productLoc").value = cells[2].textContent;
+        document.getElementById("available").value = cells[3].textContent;
+
         alert(rowNum + "번째 행이 선택되었습니다!");
     }
 
@@ -202,6 +239,8 @@
                 document.getElementById("authStatus").textContent = "로그인 성공!";
                 document.getElementById("loginForm").style.display = "none";
                 document.getElementById("productSection").style.display = "block";
+
+                loadProducts();
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -235,27 +274,22 @@
         if (resetSection.style.display === "none") {
             resetSection.style.display = "block";
             loginForm.style.display = "none";
-            productSection.style.display = "none";
         } else {
             resetSection.style.display = "none";
             loginForm.style.display = "block";
-            productSection.style.display = "none";
         }
     }
 
     function toggleChangeEmail() {
         const changeEmailSection = document.getElementById("emailChangeSection");
         const loginForm = document.getElementById("loginForm");
-        const productSection = document.getElementById("productSection");
 
         if (changeEmailSection.style.display === "none") {
             changeEmailSection.style.display = "block";
             loginForm.style.display = "none";
-            productSection.style.display = "none";
         } else {
             changeEmailSection.style.display = "none";
             loginForm.style.display = "block";
-            productSection.style.display = "none";
         }
     }
 
@@ -309,7 +343,13 @@
             event.preventDefault();
             login();
         }
-    })
+    });
+    document.getElementById("productName").addEventListener("keydown", function (event){
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addProduct();
+        }
+    });
     document.getElementById("productLoc").addEventListener("keydown", function (event){
         if (event.key === "Enter") {
             event.preventDefault();
@@ -323,15 +363,22 @@
         }
     });
 
+    const menuIcon = document.querySelector('.menu-icon');
+    const sidebar = document.querySelector('.sidebar');
+    const menu = document.querySelector('.menu'); // .menu 클래스를 가진 첫 번째 요소를 menu에 할당
+
+    menuIcon.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        menu.classList.toggle('open'); // classList.toggle을 사용하여 open 클래스 추가/제거
+    });
+
     window.selectRow = selectRow; // selectRow를 전역으로 노출
     window.addProduct = addProduct; // addProduct를 전역으로 노출
-    window.login = login; // login을 전역으로 노출
     window.logout = logout; // logout을 전역으로 노출
     window.resetPassword = resetPassword; // resetPassword를 전역으로 노출
     window.changeEmail = changeEmail; // changeEmail을 전역으로 노출
     window.toggleResetPassword = toggleResetPassword; // toggleResetPassword를 전역으로 노출
     window.toggleChangeEmail = toggleChangeEmail; // toggleChangeEmail을 전역으로 노출
-
 </script>
 </body>
 </html>
